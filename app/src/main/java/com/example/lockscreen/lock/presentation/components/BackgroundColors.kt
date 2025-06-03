@@ -25,7 +25,7 @@ fun BackgroundColors() {
             modifier = Modifier
                 .size(180.dp)
                 .offset(x = (-130).dp, y = (10).dp)
-                .background(color = Color(0xFFFFFF00).copy(alpha = 0.4f), shape = CircleShape)
+                .background(color = Color(0xFFFFFF00).copy(alpha = 0.2f), shape = CircleShape)
                 .blur(1400.dp)
         )
 
@@ -33,7 +33,7 @@ fun BackgroundColors() {
             modifier = Modifier
                 .size(200.dp)
                 .offset(x = (-80).dp, y = 800.dp)
-                .background(color = Color(0xFFFF0000).copy(alpha = 0.4f), shape = CircleShape)
+                .background(color = Color(0xFFFF0000).copy(alpha = 0.2f), shape = CircleShape)
                 .blur(1100.dp)
         )
 
@@ -41,7 +41,7 @@ fun BackgroundColors() {
             modifier = Modifier
                 .size(150.dp)
                 .offset(x = 350.dp, y = 560.dp)
-                .background(color = Color(0xFF00FF00).copy(alpha = 0.4f), shape = CircleShape)
+                .background(color = Color(0xFF00FF00).copy(alpha = 0.2f), shape = CircleShape)
                 .blur(1100.dp)
         )
 
