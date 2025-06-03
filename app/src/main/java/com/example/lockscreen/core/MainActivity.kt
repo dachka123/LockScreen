@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.example.lockscreen.core.ui.theme.LockScreenTheme
-import com.example.lockscreen.lock.presentation.components.LockScreen
+import com.example.lockscreen.lock.presentation.components.BackgroundColors
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             LockScreenTheme {
-                LockScreen()
+                BackgroundColors()
             }
         }
     }

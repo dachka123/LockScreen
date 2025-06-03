@@ -42,7 +42,7 @@ fun KeyPad(
             LazyRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp),
+                    .padding(vertical = 10.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 items(row) { label ->
@@ -83,6 +83,6 @@ fun KeyPad(
 @Composable
 private fun LockScreenPreview() {
     LockScreenTheme {
-        LockScreen()
+        BackgroundColors()
     }
 }
