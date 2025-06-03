@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">LockScreen</string>
+    <string name="enter_your_passcode">Enter your passcode</string>
+    <string name="security_screen">Security Screen</string>
+    <string name="access_granted">Access Granted</string>
+    <string name="wrong_passcode">Wrong Passcode</string>
 </resources>

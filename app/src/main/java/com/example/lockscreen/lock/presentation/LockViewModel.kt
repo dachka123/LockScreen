@@ -1,36 +1,32 @@
 package com.example.lockscreen.lock.presentation
 
-import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 class LockViewModel: ViewModel() {
 
-    private val _state = mutableStateOf(LockState())
-    val state: State<LockState> = _state
-
-    private val correctPasscode = listOf(0, 9, 3, 4)
+    var state by mutableStateOf(LockState())
+        private set
 
     fun onAction(action: LockAction){
         when(action) {
             is LockAction.OnClick -> {
-                if (_state.value.enteredDigits.size < 4) {
-                    val current = _state.value.enteredDigits
-                    if (current.size < 4) {
-                        val updated = current + action.digit
-                        val isComplete = updated.size == 4
-                        val isCorrect = isComplete && updated == correctPasscode
+                if (state.enteredDigits.length < state.correctPasscode.length) {
+                    val updated = state.enteredDigits + action.digit
+                    val isComplete = updated.length == state.correctPasscode.length
+                    val isCorrect = isComplete && updated == state.correctPasscode
 
-                        _state.value = _state.value.copy(
+                        state = state.copy(
                             enteredDigits = updated,
                             isComplete = isComplete,
                             isCorrect = isCorrect
                         )
                     }
                 }
-            }
             is LockAction.Clear -> {
-                _state.value = LockState()
+                state = LockState()
             }
         }
     }
