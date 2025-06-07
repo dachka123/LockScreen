@@ -10,12 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.lockscreen.core.ui.theme.LockScreenTheme
 
 @Composable
-fun BackgroundColors() {
+fun BackgroundColors(
+    content: @Composable () -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -44,16 +44,6 @@ fun BackgroundColors() {
                 .background(color = Color(0xFF00FF00).copy(alpha = 0.2f), shape = CircleShape)
                 .blur(1100.dp)
         )
-
-        LockScreen()
-    }
-
-}
-
-@Preview
-@Composable
-private fun LockScreenPreview() {
-    LockScreenTheme {
-        BackgroundColors()
+        content()
     }
 }

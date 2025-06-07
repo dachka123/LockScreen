@@ -1,32 +1,56 @@
 package com.example.lockscreen.lock.presentation
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 
-class LockViewModel: ViewModel() {
+class LockViewModel : ViewModel() {
 
-    var state by mutableStateOf(LockState())
+    var state = MutableStateFlow(LockState())
         private set
 
-    fun onAction(action: LockAction){
-        when(action) {
-            is LockAction.OnClick -> {
-                if (state.enteredDigits.length < state.correctPasscode.length) {
-                    val updated = state.enteredDigits + action.digit
-                    val isComplete = updated.length == state.correctPasscode.length
-                    val isCorrect = isComplete && updated == state.correctPasscode
+    var incorrect = MutableStateFlow<String?>(null)
+        private set
 
-                        state = state.copy(
-                            enteredDigits = updated,
-                            isComplete = isComplete,
-                            isCorrect = isCorrect
-                        )
+    fun setCorrectPasscode(passcode: String) {
+        state.update { it.copy(correctPasscode = passcode) }
+    }
+
+    fun onAction(action: LockAction) {
+        when (action) {
+            is LockAction.OnClick -> {
+                val current = state.value
+                if (current.enteredDigits.length < current.correctPasscode.length) {
+                    val updated = current.enteredDigits + action.digit
+                    val isComplete = updated.length == current.correctPasscode.length
+                    val isCorrect = isComplete && updated == current.correctPasscode
+
+                    if (isComplete && !isCorrect) {
+                        state.value = LockState(correctPasscode = current.correctPasscode)
+                    } else {
+                        state.update {
+                            it.copy(
+                                enteredDigits = updated,
+                                isComplete = isComplete,
+                                isCorrect = isCorrect
+                            )
+                        }
                     }
                 }
-            is LockAction.Clear -> {
-                state = LockState()
+            }
+
+            is LockAction.DeleteLast -> {
+                state.update {
+                    it.copy(
+                        enteredDigits = it.enteredDigits.dropLast(1),
+                        isComplete = false,
+                        isCorrect = false
+                    )
+                }
+            }
+
+            is LockAction.Error -> {
+                incorrect.value = null
             }
         }
     }

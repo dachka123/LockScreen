@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,6 +53,7 @@ fun KeyPad(
                         Box(
                             modifier = Modifier
                                 .size(75.dp)
+                                .clip(CircleShape)
                                 .background(Color.White, shape = CircleShape)
                                 .clickable {
                                     if (label == "⌫") {
@@ -76,13 +78,5 @@ fun KeyPad(
                 }
             }
         }
-    }
-}
-
-@Preview
-@Composable
-private fun LockScreenPreview() {
-    LockScreenTheme {
-        BackgroundColors()
     }
 }

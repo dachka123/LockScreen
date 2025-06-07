@@ -54,11 +54,3 @@ fun PassCode(
         }
     }
 }
-
-@Preview
-@Composable
-private fun LockScreenPreview() {
-    LockScreenTheme {
-        LockScreen()
-    }
-}

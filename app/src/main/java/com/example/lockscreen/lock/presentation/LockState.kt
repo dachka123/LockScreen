@@ -4,5 +4,5 @@ data class LockState(
     val enteredDigits: String = "",
     val isComplete: Boolean = false,
     val isCorrect: Boolean = false,
-    val correctPasscode: String = "0934"
+    val correctPasscode: String = "1410"
 )
