@@ -8,18 +8,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.lockscreen.lock.presentation.LockViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.lockscreen.R
+import com.example.lockscreen.core.Sizing
+import com.example.lockscreen.core.Spacer
 import com.example.lockscreen.lock.presentation.LockAction
 import kotlinx.serialization.Serializable
 
@@ -33,7 +31,7 @@ fun LockScreen(
     passcode: String,
     viewModel: LockViewModel = viewModel(),
 ) {
-    val state by viewModel.state.collectAsState()
+    val state = viewModel.state
 
     LaunchedEffect(passcode) {
         viewModel.setCorrectPasscode(passcode)
@@ -42,15 +40,15 @@ fun LockScreen(
 
     BackgroundColors {
         Column(
-            modifier = Modifier.fillMaxSize().padding(24.dp),
+            modifier = Modifier.fillMaxSize().padding(Spacer.large),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = stringResource(R.string.security_screen),
-                fontSize = 20.sp,
+                fontSize = Sizing.veryLarge,
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 16.dp))
+                modifier = Modifier.padding(top = Spacer.medium))
 
             PassCode(
                 enteredCount = state.enteredDigits.length,
@@ -66,11 +64,11 @@ fun LockScreen(
                 }
             )
             if (state.isComplete) {
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Spacer.medium))
                 if (state.isCorrect) {
-                    Text(stringResource(R.string.access_granted), color = Color.Green, fontSize = 18.sp)
+                    Text(stringResource(R.string.access_granted), color = Color.Green, fontSize = Sizing.veryLarge)
                 } else {
-                    Text(stringResource(R.string.wrong_passcode), color = Color.Red, fontSize = 18.sp)
+                    Text(stringResource(R.string.wrong_passcode), color = Color.Red, fontSize = Sizing.veryLarge)
                 }
             }
         }

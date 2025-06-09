@@ -4,4 +4,7 @@
     <string name="security_screen">Security Screen</string>
     <string name="access_granted">Access Granted</string>
     <string name="wrong_passcode">Wrong Passcode</string>
+    <string name="set_your_passcode">Set Your Passcode</string>
+    <string name="passcode">Passcode</string>
+    <string name="next">Next</string>
 </resources>

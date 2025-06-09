@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.example.lockscreen.core.ui.theme.LockScreenTheme
 import com.example.lockscreen.lock.presentation.components.LockScreen
 import com.example.lockscreen.lock.presentation.components.LockScreenDestination
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = "starterScreen"
+                    startDestination = StarterScreenDestination
                 ) {
                     composable<StarterScreenDestination> {
                         StarterScreen(onNext = { passcode ->
@@ -31,7 +32,8 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable<LockScreenDestination> { backStackEntry ->
-                        LockScreen(passcode = backStackEntry.passcode)
+                        val passcode = backStackEntry.toRoute<LockScreenDestination>().passcode
+                        LockScreen(passcode = passcode)
                     }
                 }
             }

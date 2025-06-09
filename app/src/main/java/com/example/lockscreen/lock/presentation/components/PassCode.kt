@@ -14,11 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.lockscreen.R
-import com.example.lockscreen.core.ui.theme.LockScreenTheme
+import com.example.lockscreen.core.Sizing
+import com.example.lockscreen.core.Spacer
 
 @Composable
 fun PassCode(
@@ -27,24 +26,24 @@ fun PassCode(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(vertical = 48.dp)
+        modifier = Modifier.padding(vertical = Spacer.extraLarge)
     ) {
         Text(
             text = stringResource(R.string.enter_your_passcode),
-            fontSize = 16.sp,
+            fontSize = Sizing.medium,
             color = Color.Black,
-            modifier = Modifier.padding(bottom = 24.dp)
+            modifier = Modifier.padding(bottom = Spacer.medium)
         )
 
         LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(40.dp),
-            modifier = Modifier.padding(bottom = 32.dp)
+            horizontalArrangement = Arrangement.spacedBy(Spacer.extraLarge),
+            modifier = Modifier.padding(bottom = Spacer.veryLarge)
         ) {
             items(totalCount) { index ->
                 val filled = index < enteredCount
                 Box(
                     modifier = Modifier
-                        .size(13.dp)
+                        .size(Spacer.mediumSmall)
                         .background(
                             color = if (filled) Color.Green else Color.Gray,
                             shape = CircleShape

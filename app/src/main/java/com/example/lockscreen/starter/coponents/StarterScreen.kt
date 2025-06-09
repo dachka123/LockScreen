@@ -12,10 +12,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.compose.ui.unit.sp
+import com.example.lockscreen.R
+import com.example.lockscreen.core.Sizing
+import com.example.lockscreen.core.Spacer
 import com.example.lockscreen.starter.StarterAction
 import com.example.lockscreen.starter.StarterViewModel
 import kotlinx.serialization.Serializable
@@ -33,25 +35,25 @@ fun StarterScreen(
     Column(
         modifier = Modifier.run {
             fillMaxSize()
-                .padding(24.dp)
+                .padding(Spacer.large)
         },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Set Your Passcode", fontSize = 20.sp)
+        Text(stringResource(R.string.set_your_passcode), fontSize = Sizing.veryLarge)
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(Spacer.medium))
 
         OutlinedTextField(
             value = state.passcode,
             onValueChange = {
-                val numsOnly = it.filter { char -> char.isDigit() }
-                viewModel.onAction(StarterAction.OnPasscodeChange(numsOnly))
+                val numbersOnly = it.filter { char -> char.isDigit() }
+                viewModel.onAction(StarterAction.OnPasscodeChange(numbersOnly))
             },
-            label = { Text("Passcode") },
+            label = { Text(stringResource(R.string.passcode)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(Spacer.medium))
 
         Button(
             onClick = {
@@ -60,7 +62,7 @@ fun StarterScreen(
                 }
             }
         ) {
-            Text("Next")
+            Text(stringResource(R.string.next))
         }
     }
 }
